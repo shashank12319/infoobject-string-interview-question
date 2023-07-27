@@ -1,0 +1,61 @@
+input :my name is ashwini borla  
+output :ym alrob eman iniwhsa si
+
+
+
+public class ReverseWords {
+    public static void main(String[] args) {
+        String inputValue = "my name is ashwini borla where you are a hero";
+        char[] chars = inputValue.toCharArray();
+        System.out.println(swapWords(chars, chars.length));
+        System.out.println("ym oreh eman a si era iniwhsa uoy alrob erehw");
+
+    }
+
+    private static String swapWords(char[] chars, int len) {
+        StringBuilder builder = new StringBuilder();
+        int low = 0, high = 0;
+        int low2 = len - 1, high2 = len - 1;
+        while (high < low2) {
+            while (high < low2 && chars[high] != 32) {
+                high++;
+            }
+
+            int count = high - low;
+            if (high - low <= 1) {
+                count++;
+            }
+            while (low2 > high && chars[low2] != 32) {
+                low2--;
+            }
+            if (low2 <= high) {
+                reverseSubArray(chars, low, high - 1);
+                builder.append(new String(chars, low, count));
+            } else {
+                reverseSubArray(chars, low, high - 1);
+                builder.append(new String(chars, low, count));
+            }
+            low = high + 1;
+            reverseSubArray(chars, low2 + 1, high2);
+            builder.append(' ')
+                    .append(new String(chars, low2 + 1, high2 - low2));
+            high2 = low2 - 1;
+            high++;
+            low2--;
+            if (high < low2) {
+                builder.append(' ');
+            }
+        }
+        return builder.toString();
+    }
+
+    public static void reverseSubArray(char[] s, int pos1, int pos2) {
+        while (pos2 > pos1) {
+            char c = s[pos2];
+            s[pos2--] = s[pos1];
+            s[pos1++] = c;
+        }
+    }
+
+
+}
